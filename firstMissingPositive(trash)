@@ -1,0 +1,57 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var firstMissingPositive = function(nums) {
+
+    let sorted = nums.sort(function(a, b) {
+        return a - b;
+    });
+
+    let highest = sorted[0];
+    for (let i = 0; i < sorted.length; i ++) {
+        if (sorted[i] > highest) {
+            highest = sorted[i];
+        };
+    };
+
+    if (highest <= 0) return 1;
+
+    let onlyPositives = removeNegatives(sorted);
+
+    let noDupes = removeDuplicates(onlyPositives);
+
+    let missingPositive = findLowestMissing(noDupes);
+
+    return missingPositive; 
+
+};
+
+function removeNegatives(sorted) {
+    let noNegatives = [];
+    for (let i = 0; i < sorted.length; i ++) {
+
+        if (sorted[i] <= 0) {
+            continue;
+        };
+        noNegatives.push(sorted[i]);
+    };
+    return noNegatives;
+};
+
+function findLowestMissing(positiveArray) {
+    let highestExisting = positiveArray[0];
+    if (highestExisting > 1) {
+        return 1;
+    };
+    for (let i = 0; i < positiveArray.length; i ++) {
+        if ((positiveArray[i] + 1) !== (positiveArray[i + 1])) {
+            return (positiveArray[i] + 1);
+        };
+    };
+};
+
+function removeDuplicates(array) {
+    let uniq = [...new Set(array)];
+    return uniq;
+};
