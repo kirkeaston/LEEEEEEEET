@@ -1,0 +1,26 @@
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var permute = function(nums) {
+    if (nums.length === 1) {
+        return [nums.slice()];
+    }
+    let result = [];
+    //iterate through the array
+    for (var i = 0; i < nums.length; i ++) {
+        //let n be the first number in the array
+        let n = nums.shift();
+        //recursively call the function on the rest of the numbers in a sub array
+        let perms = permute(nums.slice());
+        //
+        for (var p of perms) {
+            p.push(n);
+        }
+
+        result.push(...perms);
+        nums.push(n);
+    }
+    return result;
+
+};
