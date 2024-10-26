@@ -1,0 +1,23 @@
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var sortColors = function(nums) {
+    // create hash map to count the number of colors
+    let colorCount = {0: 0, 1: 0, 2: 0};
+
+    //count the colors in each and add them to the hash map
+    for (let i = 0; i < nums.length; i ++) {
+        colorCount[nums[i]] ++;
+    }
+
+    let index = 0;
+    //create a nested loop that manipulates the nums array into the correct amount of colors sorted next to each other as deemed by the hash map. the first loop is just looping through numbers 0, 1, 2 and the second loop adds the amount of that color retrieved from the hash map
+    for (let color = 0; color < 3; color ++) {
+        let frequency = colorCount[color];
+        for (let j = 0; j < frequency; j ++) {
+            nums[index] = color;
+            index ++;
+        }
+    }
+};
