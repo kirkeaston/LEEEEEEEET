@@ -1,0 +1,28 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function(nums) {
+
+    let count = {};
+
+    for (let i = 0; i < nums.length; i ++) {
+        if (count[nums[i]]) {
+            count[nums[i]] ++; 
+        } else {
+            count[nums[i]] = 1;
+        }
+    }
+
+    let highest = 0;
+    let result = ''; 
+    for (const key in count) {
+        if (count[key] > highest) {
+            highest = count[key];
+            result = key;
+        }
+    }
+
+    return result = Number(result);
+    
+};
